@@ -31,6 +31,7 @@ class Gadai : BaseEntity() {
     @Column(columnDefinition = "date", nullable = false)
     var date: Date? = null
 
+    val priceAdjustment: Int get() = (priceBeforeAdjustment - price) * -1
 }
 
 @Repository
