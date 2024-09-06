@@ -1,8 +1,8 @@
 package com.example.demo.services
 
 import com.example.demo.exceptions.DataNotFoundException
-import com.example.demo.models.ItemMerkRepository
 import com.example.demo.models.ItemType
+import com.example.demo.models.ItemTypePriceRepository
 import com.example.demo.models.ItemTypeRepository
 import com.example.demo.response.BaseResponse
 import com.example.demo.response.ItemTypeResponse

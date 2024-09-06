@@ -3,6 +3,7 @@ package com.example.demo.services
 import com.example.demo.exceptions.DataNotFoundException
 import com.example.demo.models.Conditions
 import com.example.demo.models.ConditionsRepository
+import com.example.demo.models.ItemMerk
 import com.example.demo.response.BaseResponse
 import com.example.demo.response.ConditionResponse
 import lombok.extern.slf4j.Slf4j
@@ -21,7 +22,12 @@ class ConditionService(
     fun getAll(search: String?): BaseResponse<List<ConditionResponse>> {
         var spec = Specification.where<Conditions>(null)
         search?.let {
-            spec = spec.and { e, _, cb -> cb.like(e.get("name"), "%${search}%") }
+            spec = spec.and { e, _, cb ->
+                cb.like(e.get("name"), "%${it}%")
+            }.or {e, _, cb ->
+                val itemMerk = e.join<Conditions, ItemMerk>("itemMerk")
+                cb.like(itemMerk.get("name"), "%${it}%")
+            }
         }
 
         return BaseResponse(conditionRepository.findAll(spec).map { ConditionResponse(it) })

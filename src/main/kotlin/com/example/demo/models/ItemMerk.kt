@@ -1,9 +1,6 @@
 package com.example.demo.models
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
-import jakarta.persistence.ManyToOne
+import jakarta.persistence.*
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
@@ -14,6 +11,9 @@ class ItemMerk: BaseEntity() {
 
     @Column(columnDefinition = "VARCHAR(100)", nullable = false)
     var name: String? = null
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    var conditions: MutableList<Conditions>? = null
 }
 
 interface ItemMerkRepository : JpaRepository<ItemMerk, Long>, JpaSpecificationExecutor<ItemMerk>

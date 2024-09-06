@@ -5,13 +5,11 @@ import com.example.demo.models.ItemCategory
 import com.example.demo.models.ItemCategoryRepository
 import com.example.demo.response.BaseResponse
 import com.example.demo.response.ItemCategoryResponse
-import lombok.extern.slf4j.Slf4j
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
-@Slf4j
 class ItemCategoryService (
     val itemTypeRepository: ItemCategoryRepository
 ) {

@@ -14,3 +14,8 @@ class Spec: BaseEntity() {
 
 @Repository
 interface SpecRepository : JpaRepository<Spec, Long>, JpaSpecificationExecutor<Spec>
+
+enum class SpecTypeEnum (val id: Long) {
+    RESMI(1),
+    BM(2),
+}

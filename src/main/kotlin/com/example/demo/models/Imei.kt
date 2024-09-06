@@ -7,19 +7,16 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 
 @Entity
-class ItemTypePrice : BaseEntity() {
-
+class Imei : BaseEntity() {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     lateinit var itemType: ItemType
 
-    @Column(columnDefinition = "INT UNSIGNED", nullable = false)
-    var price: Int = 0
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     lateinit var spec: Spec
+
+    @Column(columnDefinition = "VARCHAR(100)", nullable = false)
+    var imei: String? = null
 }
 
 @Repository
-interface ItemTypePriceRepository : JpaRepository<ItemTypePrice, Long>, JpaSpecificationExecutor<ItemTypePrice> {
-    fun findOneByItemTypeIdEqualsAndSpecIdEquals(itemTypeId: Long, specId: Long): ItemTypePrice
-}
+interface ImeiRepository : JpaRepository<Imei, Long>, JpaSpecificationExecutor<Imei>
