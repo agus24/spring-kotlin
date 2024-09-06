@@ -1,6 +1,5 @@
 package com.example.demo.response
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.json.simple.JSONObject
 import org.springframework.stereotype.Service
 

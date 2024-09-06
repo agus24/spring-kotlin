@@ -1,4 +1,4 @@
-package com.example.demo.requests.requests
+package com.example.demo.requests.gadai
 
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull

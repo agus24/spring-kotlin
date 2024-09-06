@@ -2,7 +2,10 @@ package com.example.demo.services
 
 
 import com.example.demo.exceptions.DataNotFoundException
-import com.example.demo.models.*
+import com.example.demo.models.Gadai
+import com.example.demo.models.GadaiRepository
+import com.example.demo.models.ItemTypePriceRepository
+import com.example.demo.models.SpecTypeEnum
 import com.example.demo.response.BaseResponse
 import com.example.demo.response.GadaiResponse
 import com.example.demo.utils.DateUtils
@@ -10,7 +13,6 @@ import lombok.extern.slf4j.Slf4j
 import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
 
 @Service
 @Slf4j

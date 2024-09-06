@@ -1,6 +1,6 @@
 package com.example.demo.controller
 
-import com.example.demo.requests.requests.GadaiCreateRequest
+import com.example.demo.requests.gadai.GadaiCreateRequest
 import com.example.demo.response.BaseResponse
 import com.example.demo.response.GadaiResponse
 import com.example.demo.services.GadaiService

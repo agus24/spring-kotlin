@@ -1,15 +1,12 @@
 package com.example.demo.configurations
 
 import com.example.demo.exceptions.DataNotFoundException
-import com.example.demo.response.BaseResponse
-import com.example.demo.response.ErrorResponse
 import com.example.demo.response.JsonReturn
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import org.json.simple.JSONObject
 import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
-import org.springframework.core.env.Environment
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
