@@ -1,0 +1,19 @@
+meta {
+  name: create
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/item-type-prices
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "price": 10000,
+    "itemTypeId": 1,
+    "specId": 1
+  }
+}

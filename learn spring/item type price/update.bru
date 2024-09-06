@@ -1,0 +1,19 @@
+meta {
+  name: update
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api/item-type-prices/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "price": 20000,
+    "itemTypeId": 1,
+    "specId": 1
+  }
+}
