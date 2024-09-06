@@ -36,10 +36,6 @@ class GadaiService(
         return gadaiRepository.findByIdOrNull(id) ?: throw DataNotFoundException("Item Category Not Found")
     }
 
-    fun getOne(id: Long): BaseResponse<GadaiResponse> {
-        return BaseResponse(GadaiResponse(findOne(id)))
-    }
-
     fun createOrUpdate(id: Long? = null, itemTypeId: Long, conditionId: Long, imei: String): BaseResponse<GadaiResponse> {
         val gadai = when {
             id != null -> findOne(id)
@@ -50,31 +46,25 @@ class GadaiService(
         val spec = imeiEntity?.spec
             ?: specService.findOne(SpecTypeEnum.RESMI.id)
 
-        // insert to imei if imei is null
-        if (imeiEntity == null) {
-            imeiService.createOrUpdate(null, imei, itemTypeId, spec.id)
-        }
-
         val condition = conditionService.findOne(conditionId)
-
         val itemTypePrice = itemTypePriceRepository.findOneByItemTypeIdEqualsAndSpecIdEquals(itemTypeId, spec.id)
         val itemType = itemTypeService.findOne(itemTypeId)
 
-        gadai.condition = condition
-        gadai.itemType = itemType
-        gadai.priceBeforeAdjustment = itemTypePrice.price
-        gadai.price = (itemTypePrice.price.toBigDecimal() * condition.adjustment / 100.toBigDecimal()).toInt()
-        gadai.imei = imei
-        gadai.spec = spec
-        gadai.date = DateUtils.getCurrentDate()
+        // insert to imei if imei is null
+        if (imeiEntity == null) imeiService.createOrUpdate(null, imei, itemType.id, spec.id)
 
-        gadaiRepository.save(gadai)
+        gadai.apply {
+            this.condition = conditionService.findOne(conditionId)
+            this.itemType = itemType
+            this.priceBeforeAdjustment = itemTypePrice.price
+            this.price = (itemTypePrice.price.toBigDecimal() * condition.adjustment / 100.toBigDecimal()).toInt()
+            this.imei = imei
+            this.spec = spec
+            this.date = DateUtils.getCurrentDate()
+        }.also {
+            gadaiRepository.save(it)
+        }
 
         return BaseResponse(GadaiResponse(gadai))
-    }
-
-    fun delete(id: Long) {
-        val itemType = findOne(id)
-        gadaiRepository.delete(itemType)
     }
 }
